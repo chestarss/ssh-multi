@@ -1,0 +1,14 @@
+INSTALL
+
+	make install
+	source ~/.bashrc
+	echo << EOF > ip.list
+		ip1
+		ip2
+		...
+		EOF
+	tmux    #deattach
+	~/ssh-multi.sh -a ip.list -l user -p port -i private_key 
+	tmux attach
+	
+
