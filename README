@@ -12,3 +12,5 @@ INSTALL
 	tmux attach
 	
 
+
+Usage  -c use ssh config file 
