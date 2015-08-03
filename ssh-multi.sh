@@ -24,6 +24,7 @@ starttmux() {
 FLAG=0
 user=`whoami`
 port=22
+config='N'
 
 while getopts "hci:l:p:a:" Option
 do
