@@ -3,7 +3,7 @@
 # -c is use ssh config file to provide user login info
 starttmux() {
     if [ $config != "Y" ];then
-    	tmux new-window "ssh -l $user -p $port $key -o StrictHostKeyChecking=no `sed -n '1p' $iplist`"
+    	tmux new-window "ssh -l $user $port $key -o StrictHostKeyChecking=no `sed -n '1p' $iplist`"
     else
     	tmux new-window "ssh -o StrictHostKeyChecking=no `sed -n '1p' $iplist`"
     fi
@@ -13,7 +13,7 @@ starttmux() {
     	if [ $config == "Y" ];then
             tmux split-window -h  "ssh -o StrictHostKeyChecking=no $i"
 	else
-            tmux split-window -h  "ssh -o StrictHostKeyChecking=no -l $user -p $port $key $i"
+            tmux split-window -h  "ssh -o StrictHostKeyChecking=no -l $user $port $key $i"
         fi    
         tmux select-layout tiled > /dev/null
     done
@@ -23,7 +23,7 @@ starttmux() {
 
 FLAG=0
 user=`whoami`
-port=22
+port=''
 config='N'
 
 while getopts "hci:l:p:a:" Option
@@ -34,7 +34,7 @@ do
 			key=""
 		fi
 		;;
-	p) port=$OPTARG;;                  
+	p) port='-p '$OPTARG;;                  
 	l) user=$OPTARG;;                 
 	c) config="Y";;                 
 	a) iplist=$OPTARG
